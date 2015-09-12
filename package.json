@@ -1,6 +1,6 @@
 {
   "name": "yup-validation-strategy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Yup validation strategy for react-validation-mixin",
   "main": "./lib/yupValidationStrategy.js",
   "scripts": {
