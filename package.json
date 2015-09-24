@@ -4,7 +4,7 @@
   "description": "Yup validation strategy for react-validation-mixin",
   "main": "./lib/yupValidationStrategy.js",
   "scripts": {
-    "build": "npm run build:lib",
+    "build": "mkdirp lib && npm run build:lib",
     "build:lib": "babel src --out-dir lib",
     "test": "karma start karma.conf.js --single-run",
     "test-watch": "karma start karma.conf.js",
@@ -56,5 +56,8 @@
   },
   "peerDependencies": {
     "yup": ">=0.9.2"
+  },
+  "dependencies": {
+    "invariant": "^2.1.1"
   }
 }
