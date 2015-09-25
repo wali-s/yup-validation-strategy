@@ -1,4 +1,7 @@
 import yup from 'yup';
+import set from 'lodash.set';
+import isEmpty from 'lodash.isempty';
+import { hydrate } from './utils';
 import invariant from 'invariant';
 
 export default yupOptions => {
@@ -11,16 +14,24 @@ export default yupOptions => {
         stripUnknown: true,
         ...yupOptions
       };
-      yupSchema.validate(data, validationOptions, (errors) => {
-        const errorState = errors ?
-          errors.inner.reduce((previousValue, {path, message}) => {
-            return {...previousValue, ... {[path]: [message]}};
-          }, {}) : {};
-        Object.keys(data).forEach((formItem) => {
-          errorState[formItem] = errorState[formItem] || [];
-        });
-        callback(errorState);
+      yupSchema.validate(data, validationOptions, (yupResult) => {
+        const errors = this.collectErrors(yupResult);
+        if (key === undefined || key === null || isEmpty(errors)) {
+          return callback(hydrate(errors));
+        } else {
+          return callback(set(prevErrors, key, errors[key]));
+        }
       });
+    },
+    collectErrors: function(yupResult) {
+      if (yupResult !== null) {
+        return yupResult.inner.reduce((errors, {path, message}) => {
+          return {...errors, ...{[path]: [message]}};
+        }, {});
+      } else {
+        return {};
+      }
+
     }
   };
 };
