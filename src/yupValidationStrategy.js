@@ -26,7 +26,7 @@ export default yupOptions => {
     collectErrors: function(yupResult) {
       if (yupResult !== null) {
         return yupResult.inner.reduce((errors, {path, message}) => {
-          return {...errors, ...{[path]: [message]}};
+          return {...errors, [path]: [message]};
         }, {});
       } else {
         return {};
