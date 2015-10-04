@@ -1,6 +1,6 @@
 {
   "name": "yup-validation-strategy",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Yup validation strategy for react-validation-mixin",
   "main": "./lib/yupValidationStrategy.js",
   "scripts": {
@@ -59,6 +59,7 @@
   },
   "dependencies": {
     "invariant": "^2.1.1",
+    "lodash.clone": "^3.0.3",
     "lodash.isempty": "^3.0.4",
     "lodash.set": "^3.7.4"
   }

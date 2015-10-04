@@ -1,6 +1,7 @@
 import yup from 'yup';
 import set from 'lodash.set';
 import isEmpty from 'lodash.isempty';
+import clone from 'lodash.clone';
 import { hydrate } from './utils';
 import invariant from 'invariant';
 
@@ -19,7 +20,7 @@ export default yupOptions => {
         if (key === undefined || key === null || isEmpty(errors)) {
           return callback(hydrate(errors));
         } else {
-          return callback(set(prevErrors, key, errors[key]));
+          return callback(clone(set(prevErrors, key, errors[key])));
         }
       });
     },
